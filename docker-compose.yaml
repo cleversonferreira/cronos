@@ -1,0 +1,35 @@
+# v2 syntax
+version: '2'
+
+# Named volumes
+volumes:
+  # MySQL Data
+  cronos-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: ambientum/mysql:5.7
+    container_name: cronos-mysql
+    volumes:
+      - cronos-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=cronos
+      - MYSQL_DATABASE=cronos
+      - MYSQL_USER=cronos
+      - MYSQL_PASSWORD=cronos
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.1-caddy
+    container_name: cronos-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:8080"
+    links:
+      - mysql
+
