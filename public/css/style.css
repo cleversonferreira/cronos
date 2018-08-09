@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
+
+.view-title{
+    font-size: 10.833em;
+    margin: 0 0 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: rebeccapurple;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.clock.flip-clock-wrapper {
+    margin: 0 auto;
+    display: table;
+    width: auto;
+}

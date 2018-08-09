@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/flipclock.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         <!-- Styles -->
         <style>
@@ -78,19 +80,24 @@
             @endif
 
             <div class="content">
-                    <div class="form-group">
-                        {{$cronos->name}}
-                    </div>
-                    <div class="form-group">
-                        {{$cronos->deadline_start}}
-                    </div>
-                    <div class="form-group">
-                        {{$cronos->deadline_end}}
-                    </div>
-                    <div class="form-group">
-                        {{$cronos->progress}}
-                    </div>
+                <h1 class="view-title">{{$cronos->name}}</h1>
+                <div class="clock"></div>
             </div>
         </div>
+
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('js/flipclock.min.js') }}"></script>
+
+        <script>
+            let seconds = '<?= $cronos->diff ?>';
+
+            $(document).ready(function() {
+                let clock = $('.clock').FlipClock(seconds, {
+                    clockFace: 'DailyCounter',
+                    countdown: true
+                });
+            });
+        </script>
+
     </body>
 </html>

@@ -33,6 +33,13 @@ class CronosController extends Controller
     public function view($id)
     {
         $cronos = Cronos::find($id);
+
+        date_default_timezone_set('America/Sao_Paulo');
+        $today = strtotime(date("Y-m-d H:i:s"));
+        $deadline = strtotime(date("Y-m-d H:i:s", strtotime($cronos->deadline_end)));
+        $diff = ($deadline - $today);
+        $cronos->diff = $diff;
+
         if(!$cronos)
             abort(404);
         return view('view', compact('cronos'));
