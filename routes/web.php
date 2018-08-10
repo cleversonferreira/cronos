@@ -11,24 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('dashboard', 'CronosController@index')->name('dashboard');
+Route::get('/', 'CronosController@index')->name('dashboard');
 
 // Cronos routes
 Route::group(['prefix' => '/cronos'], function(){
-
     Route::get('create', 'CronosController@create')->name('create');
     Route::get('{id}', 'CronosController@view')->name('view');
     Route::get('edit/{id}', 'CronosController@edit')->name('edit');
