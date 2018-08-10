@@ -5,7 +5,7 @@
     margin: 0 0 40px 0;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: rebeccapurple;
+    color: #6E44CE;
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -13,4 +13,8 @@
     margin: 0 auto;
     display: table;
     width: auto;
+}
+
+.flip-clock-wrapper ul li a div.up:after{
+    display: none;
 }
