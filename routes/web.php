@@ -15,6 +15,7 @@ Route::get('/', 'CronosController@index')->name('dashboard');
 
 // Cronos routes
 Route::group(['prefix' => '/cronos'], function(){
+    Route::get('all', 'CronosController@all')->name('all');
     Route::get('create', 'CronosController@create')->name('create');
     Route::get('{id}', 'CronosController@view')->name('view');
     Route::get('edit/{id}', 'CronosController@edit')->name('edit');

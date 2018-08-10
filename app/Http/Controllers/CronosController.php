@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cronos;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class CronosController extends Controller
@@ -12,6 +13,12 @@ class CronosController extends Controller
     {
         $cronos = Cronos::all();
         return view('dashboard', compact('cronos'));
+    }
+
+    public function all()
+    {
+        $cronos = Cronos::all();
+        return response()->json($cronos);
     }
 
     public function create()
