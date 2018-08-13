@@ -33,8 +33,10 @@ class CronosController extends Controller
         $cronos->deadline_start = $request->deadline_start;
         $cronos->deadline_end = $request->deadline_end;
         $cronos->progress = $request->progress;
+        
         $cronos->save();
-        return redirect()->to('/dashboard');
+
+        return $cronos;
     }
 
     public function view($id)
@@ -49,17 +51,14 @@ class CronosController extends Controller
 
         if(!$cronos)
             abort(404);
-        return view('view', compact('cronos'));
+            
+        return response()->json($cronos);
     }
 
     public function edit($id)
     {
-        $cronos = Cronos::find($id);
-        if(!$cronos)
-            abort(404);
-        return view('edit', compact('cronos'));
+        return view('edit', compact('id'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -76,7 +75,7 @@ class CronosController extends Controller
         if(!($cronos = Cronos::find($id)))
             throw new ModelNotFoundException('Not found!');
         $cronos->delete();
-        return redirect()->route('dashboard');
+        return response()->json('Project deleted successfully');
     }
 
 }

@@ -38,22 +38,48 @@ export default class Projects extends Component {
                 <tbody>
 
                 {this.state.data.map((cronos, i) => (
-                    <tr>
-                        <th>{cronos.id}</th>
-                        <th>{cronos.name}</th>
-                        <th>{cronos.deadline_end}</th>
-                        <th>{cronos.progress}%</th>
-                        <th>
-                            <a href={'/cronos/' + cronos.id}>view</a> |
-                            <a href={'/cronos/edit/' + cronos.id}>edit</a> |
-                            <a href={'/cronos/delete/' + cronos.id}>delete</a>
-                        </th>
-                    </tr>
+                        <ProjectRow key={i} i={i} cronos={cronos} object={this} />
                     )
                 )}
                 </tbody>
             </table>
         );
+    }
+}
+
+class ProjectRow extends React.Component{
+
+    deleteProject(cronos, object){
+        let $this = object
+
+        axios.get('/cronos/delete/' + cronos.id).then(response => {
+            console.log(response)
+
+            const newState = $this.state.data.slice();
+            newState.splice(newState.indexOf(cronos), 1)
+
+            $this.setState({
+                data: newState
+            })
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    render(){
+        return(
+            <tr key={this.props.i}>
+                <th>{this.props.cronos.id}</th>
+                <th>{this.props.cronos.name}</th>
+                <th>{this.props.cronos.deadline_end}</th>
+                <th>{this.props.cronos.progress}%</th>
+                <th>
+                    <a href={'/cronos/' + this.props.cronos.id}>view</a> |
+                    <a href={'/cronos/edit/' + this.props.cronos.id}>edit</a> |
+                    <a href="javascript:" onClick={this.deleteProject.bind(this, this.props.cronos, this.props.object)}>delete</a>
+                </th>
+            </tr>
+        )
     }
 }
 
