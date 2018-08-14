@@ -43,6 +43,16 @@ class CronosController extends Controller
     {
         $cronos = Cronos::find($id);
 
+        if(!$cronos)
+            abort(404);
+
+        return response()->json($cronos);
+    }
+
+    public function countdown($id)
+    {
+        $cronos = Cronos::find($id);
+
         date_default_timezone_set('America/Sao_Paulo');
         $today = strtotime(date("Y-m-d H:i:s"));
         $deadline = strtotime(date("Y-m-d H:i:s", strtotime($cronos->deadline_end)));
@@ -52,7 +62,7 @@ class CronosController extends Controller
         if(!$cronos)
             abort(404);
             
-        return response()->json($cronos);
+            return view('view', compact('cronos'));
     }
 
     public function edit($id)

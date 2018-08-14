@@ -74,7 +74,7 @@ class ProjectRow extends React.Component{
                 <th>{this.props.cronos.deadline_end}</th>
                 <th>{this.props.cronos.progress}%</th>
                 <th>
-                    <a href={'/cronos/' + this.props.cronos.id}>view</a> |
+                    <a href={'/countdown/' + this.props.cronos.id}>view</a> |
                     <a href={'/cronos/edit/' + this.props.cronos.id}>edit</a> |
                     <a href="javascript:" onClick={this.deleteProject.bind(this, this.props.cronos, this.props.object)}>delete</a>
                 </th>

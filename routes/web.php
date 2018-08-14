@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'CronosController@index')->name('dashboard');
+Route::get('/countdown/{id}', 'CronosController@countdown')->name('countdown');
 
 // Cronos routes
 Route::group(['prefix' => '/cronos'], function(){
